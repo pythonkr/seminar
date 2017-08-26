@@ -5,7 +5,7 @@ python:
 env:
 - DJANGO_SETTINGS_MODULE=seminar.settings_test
 services:
-- mysql
+- postgresql
 install:
 - pip install -r requirements-dev.txt
 before_script:
