@@ -1,0 +1,16 @@
+language: python
+sudo: false
+python:
+- 3.6
+env:
+- DJANGO_SETTINGS_MODULE=seminar.settings_test
+services:
+- postgresql
+install:
+- pip install -r requirements-dev.txt
+before_script:
+- ./manage.py migrate
+script:
+- ./manage.py test
+after_success:
+- codecov
