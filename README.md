@@ -7,5 +7,5 @@ seminar is seminar
 Explain how to run the automated tests for this system
 
 ```
-./manage.py test
+DJANGO_SETTINGS_MODULE=seminar.settings.local pytest
 ```
