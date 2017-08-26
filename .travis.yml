@@ -3,7 +3,7 @@ sudo: false
 python:
 - 3.6
 env:
-- DJANGO_SETTINGS_MODULE=seminar.settings_test
+- DJANGO_SETTINGS_MODULE=seminar.settings.test
 services:
 - postgresql
 install:
@@ -11,6 +11,6 @@ install:
 before_script:
 - ./manage.py migrate
 script:
-- ./manage.py test
+- pytest
 after_success:
 - codecov
