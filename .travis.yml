@@ -9,7 +9,13 @@ services:
 install:
 - pip install -r requirements-dev.txt
 before_script:
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- psql -c 'create database seminar_test;' -U postgres
+- sleep 3
 - ./manage.py migrate
+- uwsgi --http 0.0.0.0:8000 --wsgi-file seminar/wsgi.py --processes 1 --threads 2 --daemonize test.log
+- sleep 1
 script:
 - pytest
 after_success:
