@@ -1,2 +1,1 @@
-
-from .base import *
+from seminar.settings.base import *
