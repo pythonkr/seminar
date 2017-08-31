@@ -1,5 +1,4 @@
-
-from .base import *
+from seminar.settings.base import *
 
 # https://docs.travis-ci.com/user/database-setup/#PostgreSQL
 DATABASES = {
