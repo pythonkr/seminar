@@ -18,7 +18,7 @@ class Ticket(models.Model):
     start_time_to_sell = models.DateTimeField(default=timezone.now)
     sold_out_by_admin = models.BooleanField(default=True)
 
-    def is_sellable_this_ticket(self):
+    def is_sellable(self):
         if self.sold_out_by_admin:
             return False
 

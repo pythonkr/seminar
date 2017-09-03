@@ -3,7 +3,7 @@ from django.test import TestCase
 
 class ModelAttributeExistTest(TestCase):
     """This test class is for proving that the models' attributes exist between
-    model what I declared on models.py and model what I declared on other codes to use"""
+    model what I declared on meetup/models.py and model what I declared on other codes to use"""
 
     def test_profile(self):
         """This test is for proving that the Profile model's attributes exist"""
