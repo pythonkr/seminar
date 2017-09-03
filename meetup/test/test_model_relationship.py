@@ -62,3 +62,12 @@ class ModelRelationshipTestCase(TestCase):
         self.assertEqual(self.venue.name, 'Seoul City Hall')
         self.assertEqual(self.venue.latitude, 37.566676)
         self.assertEqual(self.venue.longitude, 126.978397)
+
+    def test_meet_up_has_venue(self):
+        """This test is for proving that a meet-up has a venue"""
+        from meetup.models import Venue, MeetUp
+        self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
+        self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
+
+        self.assertEqual(self.meet_up.venue.name, 'Seoul City Hall')
+        self.assertEqual(self.venue.meetup_set.get(id=self.meet_up.id).title, 'Python User Group Bimonthly Seminar')

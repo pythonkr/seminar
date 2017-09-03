@@ -28,7 +28,7 @@ class ModelAttributeExistTest(TestCase):
         self.email_token = EmailToken.objects.create(email='test@email.com')
 
         self.email_token_fields = [field.name for field in self.email_token._meta.get_fields()]
-        
+
         [self.assertIn(field, self.email_token_fields) for field in self.fields_to_verify]
 
     def test_venue(self):
@@ -83,3 +83,15 @@ class ModelAttributeExistTest(TestCase):
         self.program_fields = [field.name for field in self.program._meta.get_fields()]
 
         [self.assertIn(field, self.program_fields) for field in self.fields_to_verify]
+
+    def test_meet_up(self):
+        """This test is for proving that the MeetUp model's attributes exist"""
+        from meetup.models import Venue, MeetUp
+
+        self.fields_to_verify = ['title', 'venue', 'start_datetime', 'end_datetime']
+        self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
+        self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
+
+        self.meet_up_fields = [field.name for field in self.meet_up._meta.get_fields()]
+
+        [self.assertIn(field, self.meet_up_fields) for field in self.fields_to_verify]
