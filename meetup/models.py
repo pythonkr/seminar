@@ -2,6 +2,7 @@ from uuid import uuid4
 
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -26,13 +27,21 @@ class Speaker(models.Model):
     user = models.ForeignKey(User)
 
 
+class MeetUp(models.Model):
+    """This model is to manage each meet-up"""
+    title = models.CharField(max_length=100)
+    venue = models.ForeignKey(Venue)
+    start_datetime = models.DateTimeField(default=timezone.now)
+    end_datetime = models.DateTimeField(default=timezone.now)
+
+
 class Program(models.Model):
     """This model is lecture or event by speaker(s)"""
     # There should be difficulty and language information in Program?
     title = models.CharField(max_length=255)
     brief = models.TextField(null=True, verbose_name='simple information')
     description = models.TextField(null=True)
-    speakers = models.ManyToManyField(Speaker, null=True)
+    speakers = models.ManyToManyField(Speaker)
     category = models.ForeignKey(ProgramCategory, null=True, verbose_name='The category which this program is belonged')
     slide_url = models.URLField(null=True, verbose_name='A slide url')
     pdf_url = models.URLField(null=True, verbose_name='A pdf url')
@@ -41,6 +50,7 @@ class Program(models.Model):
 
     # If kind of session or lecture True, or not False (include breaktime)
     is_main_event = models.BooleanField(default=True)
+    meet_up = models.ForeignKey(MeetUp, null=True)
 
 
 class Profile(models.Model):
