@@ -1,4 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from meetup.models import MeetUp, Venue
+from registration.models import Ticket, Registration, AttendCheck, PaymentHistory
+
+User = get_user_model()
 
 
 class ModelAttributeExistTest(TestCase):
@@ -7,9 +13,6 @@ class ModelAttributeExistTest(TestCase):
 
     def test_ticket(self):
         """This test is for proving that the Ticket model's attributes exist"""
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
 
@@ -22,12 +25,6 @@ class ModelAttributeExistTest(TestCase):
 
     def test_registration(self):
         """This test is for proving that the Registration model's attributes exist"""
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
@@ -41,12 +38,6 @@ class ModelAttributeExistTest(TestCase):
 
     def test_attend_check(self):
         """This test is for proving that the AttendCheck model's attributes exist"""
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration, AttendCheck
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
@@ -61,12 +52,6 @@ class ModelAttributeExistTest(TestCase):
 
     def test_payment_history(self):
         """This test is for proving that the PaymentHistory model's attributes exist"""
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration, PaymentHistory
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)

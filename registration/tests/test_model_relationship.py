@@ -1,4 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from meetup.models import MeetUp, Venue
+from registration.models import Ticket, Registration, AttendCheck, PaymentHistory
+
+User = get_user_model()
 
 
 class ModelRelationshipTestCase(TestCase):
@@ -6,10 +12,6 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_ticket_has_the_meet_up(self):
         """This test is for proving that a ticket has one meet-up"""
-
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
 
@@ -21,13 +23,6 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_registration_has_the_ticket_and_the_user(self):
         """This test is for proving that a registration has the ticket and the user"""
-
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
@@ -40,13 +35,6 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_attend_check_has_the_registration(self):
         """This test is for proving that a attend check has the registration"""
-
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration, AttendCheck
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
@@ -59,13 +47,6 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_payment_history_has_the_registration(self):
         """This test is for proving that a payment history has the registration"""
-
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        from registration.models import Ticket, Registration, PaymentHistory
-        from meetup.models import MeetUp, Venue
-
         self.user = User.objects.create_user('username', 'test@email.com', 'password')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
