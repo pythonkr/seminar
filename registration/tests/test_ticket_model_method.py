@@ -1,4 +1,13 @@
+import datetime
+
+from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.utils import timezone
+
+from meetup.models import MeetUp, Venue
+from registration.models import Ticket, Registration
+
+User = get_user_model()
 
 
 class ModelMethodTest(TestCase):
@@ -6,13 +15,9 @@ class ModelMethodTest(TestCase):
 
     def test_ticket_is_sellable(self):
         """This test is for proving that the Ticket model's method `is_sellable() = True` operating well"""
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-        from django.utils import timezone
-
         self.now = timezone.now()
-        self.one_hour_later_from_now = self.now.replace(hour=self.now.hour + 1)
-        self.two_hours_later_from_now = self.now.replace(hour=self.now.hour + 2)
+        self.one_hour_later_from_now = self.now + datetime.timedelta(hours=1)
+        self.two_hours_later_from_now = self.now + datetime.timedelta(hours=1)
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
 
         self.sellable_meet_up = MeetUp.objects.create(title='This meet-up has sellable ticket', venue=self.venue,
@@ -28,13 +33,9 @@ class ModelMethodTest(TestCase):
     def test_ticket_is_not_sellable_by_admin(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` operating well by
         `sold_out_by_admin` attribute"""
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-        from django.utils import timezone
-
         self.now = timezone.now()
-        self.one_hour_later_from_now = self.now.replace(hour=self.now.hour + 1)
-        self.two_hours_later_from_now = self.now.replace(hour=self.now.hour + 2)
+        self.one_hour_later_from_now = self.now + datetime.timedelta(hours=1)
+        self.two_hours_later_from_now = self.now + datetime.timedelta(hours=2)
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
 
         self.not_sellable_meet_up = MeetUp.objects.create(title='This meet-up has not-sellable ticket',
@@ -53,14 +54,10 @@ class ModelMethodTest(TestCase):
     def test_ticket_is_not_sellable_by_not_yet(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
         `not_yet_to_sell() = True` operating well"""
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-        from django.utils import timezone
-
         self.now = timezone.now()
-        self.half_hour_later_from_now = self.now.replace(minute=self.now.minute + 30)
-        self.one_hour_later_from_now = self.now.replace(hour=self.now.hour + 1)
-        self.two_hours_later_from_now = self.now.replace(hour=self.now.hour + 2)
+        self.half_hour_later_from_now = self.now + datetime.timedelta(minutes=30)
+        self.one_hour_later_from_now = self.now + datetime.timedelta(hours=1)
+        self.two_hours_later_from_now = self.now + datetime.timedelta(hours=2)
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
 
         self.not_sellable_meet_up = MeetUp.objects.create(title='This meet-up has not-sellable ticket',
@@ -80,13 +77,9 @@ class ModelMethodTest(TestCase):
     def test_ticket_is_not_sellable_by_over_deadline(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
        `is_over_deadline() = True` operating well"""
-        from registration.models import Ticket
-        from meetup.models import MeetUp, Venue
-        from django.utils import timezone
-
         self.now = timezone.now()
-        self.one_hour_ago_from_now = self.now.replace(hour=self.now.hour - 1)
-        self.two_hours_later_from_now = self.now.replace(hour=self.now.hour + 2)
+        self.one_hour_ago_from_now = self.now + datetime.timedelta(hours=-1)
+        self.two_hours_later_from_now = self.now + datetime.timedelta(hours=2)
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
 
         self.not_sellable_meet_up = MeetUp.objects.create(title='This meet-up has not-sellable ticket',
@@ -105,15 +98,9 @@ class ModelMethodTest(TestCase):
     def test_ticket_is_not_sellable_by_over_maximum_count(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
        `is_over_maximum_count() = True` operating well"""
-        from registration.models import Ticket, Registration
-        from meetup.models import MeetUp, Venue
-        from django.utils import timezone
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
         self.now = timezone.now()
-        self.one_hour_later_from_now = self.now.replace(hour=self.now.hour + 1)
-        self.two_hours_later_from_now = self.now.replace(hour=self.now.hour + 2)
+        self.one_hour_later_from_now = self.now + datetime.timedelta(hours=1)
+        self.two_hours_later_from_now = self.now + datetime.timedelta(hours=2)
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
 
         self.not_sellable_meet_up = MeetUp.objects.create(title='This meet-up has not-sellable ticket',
