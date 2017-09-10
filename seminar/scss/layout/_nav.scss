@@ -1,0 +1,55 @@
+nav {
+  position: relative;
+  margin: 0 auto;
+  width: 1080px;
+  background-color: white;
+  font-weight: bold;
+}
+
+.navbar__left {
+  display: inline-block;
+}
+
+.navbar__right {
+  float: right;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
+.navbar a {
+  display: block;
+  padding: 13px 20px;
+  color: $dark-blue;
+  text-align: center;
+}
+
+.navbar a:hover {
+  color: $main-blue;
+}
+
+.navbar__logo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  display: block;
+  margin: 9px 0 9px -18px;
+  width: 32px;
+  height: 32px;
+
+  background-image: url("../img/logo-python.svg");
+  background-size: contain;
+}
+
+.navbar__logo:hover {
+  background-image: url("../img/logo-python-hover.svg");
+}
+
+.navbar__logo--preload {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  background-image: url("../img/logo-python-hover.svg");
+}

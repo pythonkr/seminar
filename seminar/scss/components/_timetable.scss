@@ -1,0 +1,47 @@
+.timetable {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 1080px;
+}
+
+.timetable__row {
+    border-bottom: 1px solid $light-gray;
+    overflow: auto;
+}
+
+.timetable__row:last-child {
+    border: none;
+}
+
+.timetable__time {
+    float: left;
+    padding: 1.3rem 1rem;
+    width: 18%;
+
+    text-align: center;
+    line-height: 1.5rem;
+    box-sizing: border-box;
+}
+
+.timetable__title {
+    float: left;
+    padding: 1.3rem 1rem;
+    padding-right: 1.5rem; 
+    width: 67%; 
+    box-sizing: border-box;
+}
+
+.timetable__speaker {
+    float: left;
+    padding: 1.3rem 1rem;
+    width: 15%;
+    height: 100%;
+    
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.timetable__title:hover, .timetable__speaker:hover {
+    background-color: #f8f8f8;
+}

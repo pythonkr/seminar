@@ -1,0 +1,12 @@
+.dropdown__menu {
+  position: absolute;
+  display: none;
+  background-color: white;
+  min-width: 165px;
+  border: 1px solid $light-gray;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown__menu {
+  display: block;
+}

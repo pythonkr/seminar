@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+@import "base/colors.scss";
+
+@import "layout/_grid.scss";
+@import "layout/_layout.scss";
+@import "layout/_nav.scss";
+@import "layout/_footer.scss";
+
+@import "components/_buttons.scss";
+@import "components/_forms.scss";
+@import "components/_media.scss";
+@import "components/_dropdown.scss";
+@import "components/_alert.scss";
+@import "components/_timetable.scss";
+
+@import "pages/_index.scss";
+@import "pages/_register.scss";
+@import "pages/_coc.scss";
+@import "pages/_program.scss";
+@import "pages/_speaker.scss";
+
+html, 
+body {
+  height: 100%;
+}
+
+html,
+body,
+p,
+ul,
+li {
+  color: $dark-blue;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+div,
+section {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Lato', 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+}
+
+input,
+select,
+textarea,
+button {
+  margin: 0;
+  font-family: inherit;
+}
+
+input {
+  padding: 7px 10px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+.link {
+  color: $main-blue;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+p {
+  margin-bottom: 1.1rem;
+}
+
+iframe {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+}
