@@ -1,0 +1,7 @@
+<h1>< 파이썬 세미나 ></h1>
+<p>아래 주소를 통해 파이썬 세미나 홈페이지에 로그인하실 수 있습니다.</p>
+<p>Link:
+    <a href="http://{{ request.get_host }}{% url 'sentinel:token' token.token %}">
+        http://{{ request.get_host }}{% url "sentinel:token" token.token %}
+    </a>
+</p>

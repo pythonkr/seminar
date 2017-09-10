@@ -13,14 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from meetup import views as meetup_view
 from registration import views as registration_view
 
 urlpatterns = [
-    url(r'^$', meetup_view.index),
+    url(r'^$', meetup_view.index, name='index'),
     url(r'^past/$', meetup_view.past),
     url(r'^past_list/$', meetup_view.past_list),
     url(r'^profile/$', meetup_view.profile),
@@ -32,8 +32,6 @@ urlpatterns = [
 
     url(r'^registration/$', registration_view.registration),
 
-    url(r'^login/$', meetup_view.login),
-    url(r'^mailsent/$', meetup_view.mailsent),
-
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+    url(r'^sentinel/', include('sentinel.urls', namespace='sentinel')),
 ]
