@@ -28,17 +28,21 @@
 			</div>
 		</li>
 	</ul>  
-	<a class="navbar__logo" href="#"></a>
+	<a class="navbar__logo" href="{% url 'index' %}"></a>
 	<div class="navbar__logo--preload"></div>
 	<ul class="navbar navbar__right">
+		{% if user.is_authenticated %}
 		<li class="dropdown">
-			<a href="#">로그인</a>
+			<a href="">{{ user.email }}</a>
 			<div class="dropdown__menu">
 				<a class="dropdown__item" href="">프로필</a>
-				<a class="dropdown__item" href="">로그아웃</a>
+				<a class="dropdown__item" href="{% url 'sentinel:logout' %}">로그아웃</a>
 			</div>
 		</li>
-	</ul>  
+		{% else %}
+		<a href="{% url 'sentinel:login' %}">로그인</a>
+		{% endif %}
+	</ul>
 </nav>
 
 <!--아래의 main-container는 index일때는 빼주세요-->  

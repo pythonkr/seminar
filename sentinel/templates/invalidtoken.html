@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}로그인 실패{% endblock %}
+{% block body %}
+<section>
+	<div class="col-33 col-m-100 col--center">
+		<div class="section__title">유효하지 않은 토큰</div>
+		<div class="success-message">        
+			<i class="fa fa-check-circle-o fa-5x" aria-hidden="true"></i><br><br>
+			유효하지 않은 토큰입니다<br><br>
+			로그인 토큰은 1시간 동안만 유효합니다.<br>
+			토큰을 잃어버리셨거나 늦었다면<br>다시 로그인 해주세요.
+		</div>
+		<button class="btn--wide btn--important">로그인</button>
+	</div>
+</section>
+{% endblock %}
