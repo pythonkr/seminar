@@ -1,0 +1,34 @@
+input {
+	padding: 7px 10px;
+	margin-bottom: 5px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+input:focus {
+	outline: none;
+	border-color: white;
+	-webkit-box-shadow: inset 0px -2px 0px 0px $main-yellow;
+	-moz-box-shadow: inset 0px -2px 0px 0px $main-yellow;
+	box-shadow: inset 0px -2px 0px 0px $main-yellow;
+}
+
+.form-section {
+	margin-bottom: 1.3rem;
+}
+
+.form__title {
+	margin: .5rem 0;
+	width: 100%;
+	font-size: .7rem;
+	font-weight: 700;
+}
+
+.form__caption {
+	font-size: .8em;
+	color: $main-gray;
+}
+
+.input__wide {
+	width: 100%;
+}

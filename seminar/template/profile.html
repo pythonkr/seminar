@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}프로필{% endblock %}
+{% block body %}
+<section>
+	<div class="col-33 col-m-100 col--center">
+		<div class="section__title">프로필</div>
+		<div class="form-section">
+			<div class="form__title">이름*</div>
+			<input class="input__wide" placeholder="홍길동">
+			<div class="form__title">연락처</div>
+			<input class="input__wide" placeholder="010-0000-0000">
+			<div class="form__title">소속</div>
+			<input class="input__wide" placeholder="파이썬 사용자 모임">
+			<div class="form__title">국적</div>
+			<input class="input__wide" placeholder="대한민국">
+			<div class="form__title">사진</div>
+			<button class="btn--tiny btn--black">파일 선택</button>
+			<div class="form__caption">최대 크기 5 MB / Minimum dimension is 500 x 500</div>
+			<div class="form__title">자기소개</div>
+			<textarea name="" id="" cols="30" rows="10"></textarea>
+		</div>
+		<button class="btn--wide btn--important">제출</button>
+	</div>
+</section>
+{% endblock %}

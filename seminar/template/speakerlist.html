@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}발표자 목록{% endblock %}
+{% block body %}
+<section>
+  <div class="col-100">
+    <div class="section__title">발표자 목록</div>
+    <ul>
+      <a href="">
+        <li class="speaker__list">
+          <div class="speaker__list__thumbnail">
+            <img class="speaker__list__thumbnail-img" src="../static/img/seminar-thumbnail.jpg" alt="">
+          </div>
+          <div class="speaker__list__info">
+            <div class="speaker__list__name">홍길동/kil233</div>
+            <div class="speaker__list__title">홍길동의 즐거운 파이썬세션</div>
+          </div>
+        </li>
+      </a>
+
+      <a href="">
+        <li class="speaker__list">
+          <div class="speaker__list__thumbnail">
+            <img class="speaker__list__thumbnail-img" src="../static/img/seminar-thumbnail.jpg" alt="">
+          </div>
+          <div class="speaker__list__info">
+            <div class="speaker__list__name">홍길동/dong</div>
+            <div class="speaker__list__title">홍길동의 즐거운 파이썬세션</div>
+          </div>
+        </li>
+      </a>
+
+    </ul>
+  </div>
+</section>
+{% endblock %}

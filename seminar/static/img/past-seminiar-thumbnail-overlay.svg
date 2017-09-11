@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" sodipodi:docbase="/home/sdeibel" sodipodi:docname="logo-python-generic.svg" inkscape:version="0.43" sodipodi:version="0.32" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="500px"
+	 viewBox="-233.941 -233.764 500 500" enable-background="new -233.941 -233.764 500 500" xml:space="preserve">
+<sodipodi:namedview  inkscape:current-layer="svg2" inkscape:window-y="0" inkscape:window-x="0" inkscape:window-width="791" inkscape:window-height="543" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:cy="71.887497" inkscape:cx="243.02499" borderopacity="1.0" pagecolor="#ffffff" bordercolor="#666666" inkscape:zoom="1.4340089" id="base">
+	</sodipodi:namedview>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="-233.941" y="-233.764" width="500" height="500"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<path id="path1948" clip-path="url(#SVGID_2_)" fill="#0A2B3D" d="M-158.466-629.831c-38.904,0.166-76.046,3.474-108.755,9.203
+		c-96.35,16.797-113.826,52.079-113.826,116.97v85.838h227.637v28.577h-227.637h-85.418c-66.111,0-124.081,39.336-142.21,114.128
+		c-20.881,85.777-21.809,139.315,0,228.844c16.184,66.63,54.837,114.112,120.971,114.112h78.281v-102.85
+		c0-74.319,65.016-139.856,142.203-139.856h227.362c63.26,0,113.795-51.561,113.795-114.43v-214.378
+		c0-60.99-52.04-106.829-113.795-116.993C-78.969-627.102-119.553-629.996-158.466-629.831z M-281.558-534.025
+		c23.527,0,42.698,19.3,42.698,43.028c0,23.637-19.171,42.771-42.698,42.771c-23.588,0-42.698-19.103-42.698-42.771
+		C-324.255-514.724-305.146-534.025-281.558-534.025z"/>
+	<path id="path1950" clip-path="url(#SVGID_2_)" fill="#0A2B3D" d="M275.332-175.272v99.965
+		c0,77.529-66.376,142.773-142.164,142.773H-94.187c-62.287,0-113.826,52.703-113.826,114.416v214.394
+		c0,60.974,53.66,96.85,113.826,114.369c72.055,20.959,141.122,24.78,227.354,0c57.285-16.421,113.795-49.426,113.795-114.369
+		v-85.83H19.616v-28.632h227.317h113.811c66.117,0,90.838-45.634,113.84-114.112c23.732-70.509,22.744-138.323,0-228.851
+		c-16.389-65.124-47.601-114.122-113.84-114.122H275.332z M147.475,405.162c23.625,0,42.766,19.141,42.766,42.748
+		c0,23.743-19.125,43.081-42.766,43.081c-23.474,0-42.676-19.338-42.676-43.081C104.738,424.302,123.971,405.162,147.475,405.162z"
+		/>
+</g>
+</svg>

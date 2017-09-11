@@ -1,0 +1,32 @@
+[class*="col-"] {
+    float: left;
+    padding: 1.2%;
+    box-sizing: border-box;
+  }
+  
+  .col--center {
+    float: none;
+    margin: 0 auto;
+  }
+  
+  .col-30 {
+    width: 30%;
+  }
+  
+  .col-33 {
+    width: 33.3%;
+  }
+  
+  .col-70 {
+    width: 70%;
+  }
+  
+  .col-100 {
+    width: 100%;
+  }
+  
+  .main-container {
+    width: 1080px;
+    margin: 0 auto;
+    min-height: calc(100% - 270px);
+  }

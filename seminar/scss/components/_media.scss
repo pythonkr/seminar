@@ -1,0 +1,41 @@
+@media all and (max-width: 1200px) {
+    .main-container, 
+    footer, 
+    nav {
+      width: 100%;
+    }
+  }
+  
+  
+  @media all and (max-width: 1080px) {
+    .col-m-none {
+      display: none;
+    }
+    
+    .col-m-30 {
+      width: 30%;
+    }
+    
+    .col-m-33 {
+      width: 33.3%;
+    }
+  
+    .col-m-50 {
+      width: 50%;
+    }
+    
+    .col-m-70 {
+      width: 70%;
+    }
+    
+    .col-m-100 {
+      width: 100%;
+    }
+  }
+  
+  @media all and (max-width: 640px) {
+    .register--sidebar {
+      float: none;
+    }
+  }
+  
