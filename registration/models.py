@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
@@ -10,13 +12,23 @@ User = get_user_model()
 class Ticket(models.Model):
     """This model is a meet-up ticket for payment"""
     title = models.CharField(max_length=50)
-    meet_up = models.OneToOneField(MeetUp)
+    meet_up = models.ForeignKey(MeetUp)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     charge = models.PositiveIntegerField(default=0)
     maximum_count = models.PositiveIntegerField(default=0)
     start_time_to_sell = models.DateTimeField(default=timezone.now)
     sold_out_by_admin = models.BooleanField(default=True)
+    is_internal = models.BooleanField(default=True)
+    refund_close_datetime = models.DateTimeField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.refund_close_datetime = self.meet_up.start_datetime + datetime.timedelta(hours=-1)
+        else:
+            pass
+
+        super(Ticket, self).save(*args, **kwargs)
 
     def is_sellable(self):
         if self.sold_out_by_admin:
@@ -42,6 +54,9 @@ class Ticket(models.Model):
     def is_over_maximum_count(self):
         return Registration.objects.filter(ticket=self).count() >= self.maximum_count
 
+    def is_refundable(self):
+        return timezone.now() < self.refund_close_datetime
+
 
 class Registration(models.Model):
     """This model is a registration for each meet-up with user
@@ -61,8 +76,10 @@ class AttendCheck(models.Model):
 
 class PaymentHistory(models.Model):
     """This model is to store payment history"""
-    registration = models.ForeignKey(Registration, db_index=True)
+    registration = models.OneToOneField(Registration, db_index=True)
     is_canceled = models.BooleanField(default=False)
+    imp_uid = models.CharField(max_length=256, null=True)
+    merchant_uid = models.CharField(max_length=256, null=True)
 
     # For extensibility
     payment_method_choices = (

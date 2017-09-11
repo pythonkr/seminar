@@ -1,4 +1,7 @@
 django==1.11.4
+django-constance==2.0.0
+django-picklefield==1.0.0
 psycopg2==2.7.3
 uWSGI==2.0.15
 Pillow==4.2.1
+iamport-rest-client==0.6.0
