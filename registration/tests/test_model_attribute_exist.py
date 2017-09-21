@@ -25,7 +25,7 @@ class ModelAttributeExistTest(TestCase):
 
     def test_registration(self):
         """This test is for proving that the Registration model's attributes exist"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
@@ -38,7 +38,7 @@ class ModelAttributeExistTest(TestCase):
 
     def test_attend_check(self):
         """This test is for proving that the AttendCheck model's attributes exist"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
@@ -52,7 +52,7 @@ class ModelAttributeExistTest(TestCase):
 
     def test_payment_history(self):
         """This test is for proving that the PaymentHistory model's attributes exist"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)

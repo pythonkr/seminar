@@ -11,19 +11,21 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_user_has_the_profile(self):
         """This test is for proving that a user has a profile"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.profile = Profile.objects.create(user=self.user, name='Noh Seho',
                                               slug='seho', organization='PyCon Korea')
 
-        self.assertEqual(self.profile.user.username, 'username')
+        self.assertEqual(self.profile.user.email, 'test@email.com')
         self.assertEqual(self.user.profile.slug, 'seho')
 
     def test_user_become_a_speaker(self):
         """This test is for proving that a user become a speaker"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
+        self.profile = Profile.objects.create(user=self.user, name='Noh Seho',
+                                              slug='seho', organization='PyCon Korea')
         self.speaker = Speaker.objects.create(user=self.user)
 
-        self.assertEqual(self.speaker.user.username, 'username')
+        self.assertEqual(self.speaker.user.email, 'test@email.com')
 
     def test_program_has_a_program_category(self):
         """This test is for proving that a program has a program category"""
@@ -37,7 +39,7 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_speaker_has_a_program(self):
         """This test is for proving that a speaker has a program"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.speaker = Speaker.objects.create(user=self.user)
         self.program = Program.objects.create(title='How to migrate from ruby to python',
                                               brief='Have you ever write down the ruby code?',
