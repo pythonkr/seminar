@@ -113,7 +113,7 @@ class ModelMethodTest(TestCase):
                                                          maximum_count=1, start_time_to_sell=timezone.now(),
                                                          sold_out_by_admin=False)
 
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.registration = Registration.objects.create(user=self.user, ticket=self.not_sellable_ticket)
 
         self.assertFalse(self.not_sellable_ticket.is_sellable())

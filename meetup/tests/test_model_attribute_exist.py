@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from meetup.models import Profile, EmailToken, Venue, Program, ProgramCategory, Speaker, MeetUp
+from meetup.models import Profile, Venue, Program, ProgramCategory, Speaker, MeetUp
 
 User = get_user_model()
 
@@ -12,7 +12,7 @@ class ModelAttributeExistTest(TestCase):
 
     def test_profile(self):
         """This test is for proving that the Profile model's attributes exist"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
 
         self.fields_to_verify = ['user', 'name', 'slug', 'organization', 'image', 'biography']
         self.profile = Profile.objects.create(user=self.user, name='Noh Seho',
@@ -20,14 +20,6 @@ class ModelAttributeExistTest(TestCase):
         self.profile_fields = [field.name for field in self.profile._meta.get_fields()]
 
         [self.assertIn(field, self.profile_fields) for field in self.fields_to_verify]
-
-    def test_email_token(self):
-        """This test is for proving that the EmailToken model's attributes exist"""
-        self.fields_to_verify = ['email', 'token', 'created_at']
-        self.email_token = EmailToken.objects.create(email='test@email.com')
-        self.email_token_fields = [field.name for field in self.email_token._meta.get_fields()]
-
-        [self.assertIn(field, self.email_token_fields) for field in self.fields_to_verify]
 
     def test_venue(self):
         """This test is for proving that the Venue model's attributes exist """
@@ -48,7 +40,7 @@ class ModelAttributeExistTest(TestCase):
 
     def test_speaker(self):
         """This test is for proving that the Speaker model's attributes exist"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
 
         self.fields_to_verify = ['user']
         self.speaker = Speaker.objects.create(user=self.user)

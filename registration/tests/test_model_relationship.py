@@ -23,19 +23,19 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_registration_has_the_ticket_and_the_user(self):
         """This test is for proving that a registration has the ticket and the user"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
 
         self.registration = Registration.objects.create(user=self.user, ticket=self.ticket)
 
-        self.assertEqual(self.registration.user.username, 'username')
+        self.assertEqual(self.registration.user.email, 'test@email.com')
         self.assertEqual(self.registration.ticket.title, 'Normal Ticket')
 
     def test_attend_check_has_the_registration(self):
         """This test is for proving that a attend check has the registration"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
@@ -47,7 +47,7 @@ class ModelRelationshipTestCase(TestCase):
 
     def test_payment_history_has_the_registration(self):
         """This test is for proving that a payment history has the registration"""
-        self.user = User.objects.create_user('username', 'test@email.com', 'password')
+        self.user = User.objects.create_user('test@email.com')
         self.venue = Venue.objects.create(name='Seoul City Hall', latitude=37.566676, longitude=126.978397)
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
