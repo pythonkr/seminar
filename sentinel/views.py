@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
@@ -11,7 +10,7 @@ from django.views import View
 from .models import EmailToken, EmailUser
 from .forms import EmailLoginForm
 
-from .async_email_sender import send_mail
+from django.core.mail import send_mail
 
 
 class LoginView(View):
@@ -34,13 +33,11 @@ class LoginView(View):
             token.save()
 
             self.send_email_token(request, token)
-            return render(request, 'mailsent.html')
-
-        return render(request, self.template_name, {'form': form})
+        else:
+            return render(request, self.template_name, {'form': form})
 
     def send_email_token(self, request, token):
         html = render_to_string('mail/email_token.html', {'token': token}, request)
-
         send_mail(
             "파이콘 세미나 일회용 로그인 토큰",
             html,
@@ -48,6 +45,7 @@ class LoginView(View):
             [token.email],
             html=html,
         )
+        return render(request, 'mail_sent.html')
 
 
 class CheckTokenView(View):
@@ -56,15 +54,14 @@ class CheckTokenView(View):
         time_threshold = datetime.now() - timedelta(hours=1)
         try:
             token = EmailToken.objects.get(token=token, created_at__gte=time_threshold)
-        except ObjectDoesNotExist:
-            return render(request, 'invalidtoken.html')
+        except EmailToken.DoesNotExist:
+            return render(request, 'invalid_token.html')
 
         email = token.email
         try:
             user = EmailUser.objects.get(email=email)
-        except ObjectDoesNotExist:
+        except EmailUser.DoesNotExist:
             user = EmailUser.objects.create_user(email)
-            # user.save()
 
         login(request, user)
         token.delete()
