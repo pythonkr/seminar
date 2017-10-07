@@ -7,11 +7,19 @@
     <div class="section--caption">
       오직 메일 주소만 저장합니다.<br>비밀번호나 기타 개인 정보를 절대로 저장하지 않습니다.
     </div>
-    <div class="form-section">
-      <div class="form__title">메일로 로그인</div>
-      <input class="input__wide" placeholder="이메일 주소">
-    </div>
-    <button class="btn--wide btn--important">로그인</button>
+    <form action="." method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+        <p>e-mail 형식만 입력이 가능합니다</p>
+    {% endif %}
+
+      <div class="form-section">
+        <div class="form__title">메일로 로그인</div>
+        {{ form.email }}
+      </div>
+
+      <button class="btn--wide btn--important">로그인</button>
+    </form>
   </div>
 </section>
 {% endblock %}
