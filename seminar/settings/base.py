@@ -132,6 +132,7 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'sentinel.EmailUser'
 
+LOGIN_URL = '/sentinel/'
 
 # email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
