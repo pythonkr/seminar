@@ -10,7 +10,9 @@
 			로그인 토큰은 1시간 동안만 유효합니다.<br>
 			토큰을 잃어버리셨거나 늦었다면<br>다시 로그인 해주세요.
 		</div>
-		<button class="btn--wide btn--important">메인으로</button>
+		<form action="{% url 'index' %}">
+			<button class="btn--wide btn--important" type="submit">메인으로</button>
+		</form>
 	</div>
 </section>
 {% endblock %}

@@ -32,20 +32,20 @@ class LoginView(View):
             token = EmailToken(email=email)
             token.save()
 
-            self.send_email_token(request, token)
+            self.send_email_token(request, token, email)
+            return render(request, 'mail_sent.html')
         else:
             return render(request, self.template_name, {'form': form})
 
-    def send_email_token(self, request, token):
+    def send_email_token(self, request, token, email):
         html = render_to_string('mail/email_token.html', {'token': token}, request)
         send_mail(
             "파이콘 세미나 일회용 로그인 토큰",
             html,
             settings.EMAIL_HOST_USER,
-            [token.email],
-            html=html,
+            [email],
+            html_message=html,
         )
-        return render(request, 'mail_sent.html')
 
 
 class CheckTokenView(View):
