@@ -7,7 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
 
 	{% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}" />
 </head>
 <body>
@@ -16,10 +16,10 @@
 		<li class="dropdown">
 			<a href="#">세미나</a>
 			<div class="dropdown__menu">
-				<a class="dropdown__item" href="">등록</a>
-				<a class="dropdown__item" href="">세션정보</a>
-				<a class="dropdown__item" href="">발표자정보</a>
-				<a class="dropdown__item" href="">지난 세미나</a>
+				<a class="dropdown__item" href="{% url 'meetup:registration' %}">등록</a>
+				<a class="dropdown__item" href="{% url 'meetup:schedule' %}">세션정보</a>
+				<a class="dropdown__item" href="{% url 'meetup:speaker_list' %}">발표자정보</a>
+				<a class="dropdown__item" href="{% url 'meetup:past_list' %}">지난 세미나</a>
 			</div>
 		</li>
 		<li class="dropdown">
@@ -27,7 +27,7 @@
 			<div class="dropdown__menu">
 				<a class="dropdown__item" href="">설명</a>
 				<a class="dropdown__item" href="{% url 'coc' %}">Code of Conduct</a>
-				<a class="dropdown__item" href="http://blog.pycon.kr">블로그</a>
+				<a class="dropdown__item" href="http://blog.pycon.kr" target="_blank">블로그</a>
 			</div>
 		</li>
 	</ul>  
