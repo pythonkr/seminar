@@ -1,9 +1,12 @@
 from django.conf.urls import url
 
-from .views import past, past_list, profile, program, schedule, speaker, speaker_list, registration
+from .views import (
+    LatestMeetUpTV,
+    past_list, profile, program, schedule, speaker, speaker_list, registration
+)
 
 urlpatterns = [
-    url(r'^past/$', past, name='past'),
+    url(r'^past/$', LatestMeetUpTV.as_view(), name='past'),
     url(r'^past_list/$', past_list, name='past_list'),
     url(r'^profile/$', profile, name='profile'),
     url(r'^program/$', program, name='program'),

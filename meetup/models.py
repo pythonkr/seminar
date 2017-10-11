@@ -10,8 +10,12 @@ class Venue(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=255, null=True)
     description = models.TextField(null=True)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7)
+    map_link = models.URLField(max_length=255, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ProgramCategory(models.Model):
@@ -19,10 +23,8 @@ class ProgramCategory(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
 
-
-class Speaker(models.Model):
-    """This model is that user related by speaker at program"""
-    user = models.ForeignKey(User)
+    def __str__(self):
+        return self.name
 
 
 class MeetUp(models.Model):
@@ -32,23 +34,8 @@ class MeetUp(models.Model):
     start_datetime = models.DateTimeField(default=timezone.now)
     end_datetime = models.DateTimeField(default=timezone.now)
 
-
-class Program(models.Model):
-    """This model is lecture or event by speaker(s)"""
-    # There should be difficulty and language information in Program?
-    title = models.CharField(max_length=255)
-    brief = models.TextField(null=True, verbose_name='simple information')
-    description = models.TextField(null=True)
-    speakers = models.ManyToManyField(Speaker)
-    category = models.ForeignKey(ProgramCategory, null=True, verbose_name='The category which this program is belonged')
-    slide_url = models.URLField(null=True, verbose_name='A slide url')
-    pdf_url = models.URLField(null=True, verbose_name='A pdf url')
-    video_url = models.URLField(null=True, verbose_name='A video url')
-    is_recordable = models.BooleanField(default=True, verbose_name='recordable condition')
-
-    # If kind of session or lecture True, or not False (include breaktime)
-    is_main_event = models.BooleanField(default=True)
-    meet_up = models.ForeignKey(MeetUp, null=True)
+    def __str__(self):
+        return self.start_datetime.strftime("%Y년 %m월")
 
 
 class Profile(models.Model):
@@ -60,3 +47,23 @@ class Profile(models.Model):
     image = models.ImageField(upload_to='profile', null=True)
     biography = models.TextField(max_length=4000, null=True)
 
+    def __str__(self):
+        return self.name
+
+
+class Program(models.Model):
+    """This model is lecture or event by speaker(s)"""
+    # There should be difficulty and language information in Program?
+    title = models.CharField(max_length=255)
+    brief = models.TextField(null=True, verbose_name='simple information')
+    description = models.TextField(null=True)
+    speakers = models.ForeignKey(User, null=True)
+    category = models.ForeignKey(ProgramCategory, null=True, verbose_name='The category which this program is belonged')
+    slide_url = models.URLField(null=True, verbose_name='A slide url')
+    pdf_url = models.URLField(null=True, verbose_name='A pdf url')
+    video_url = models.URLField(null=True, verbose_name='A video url')
+    is_recordable = models.BooleanField(default=True, verbose_name='recordable condition')
+
+    # If kind of session or lecture True, or not False (include breaktime)
+    is_main_event = models.BooleanField(default=True)
+    meet_up = models.ForeignKey(MeetUp, null=True)
