@@ -62,6 +62,9 @@ class Ticket(models.Model):
     def is_refundable(self):
         return timezone.now() < self.refund_close_datetime
 
+    def __str__(self):
+        return '{} : {}'.format(self.title, self.meet_up.title)
+
 
 class Registration(models.Model):
     """This model is a registration for each meet-up with user
