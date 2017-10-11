@@ -1,4 +1,5 @@
 ﻿{% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}파이썬 세미나{% endblock %}
 {% block body %}
 <section class="index-jumbotron">
@@ -56,13 +57,13 @@
 			다른 사람을 존중해 주십시오. 다른 참석자들을 모욕하거나 상처주지 마십시오.<br> 차별이나 성희롱, 인종차별, 공격적인 농담은 파이썬 세미나에서 허용되지 않습니다.<br>
 			이러한 규칙을 어기는 참석자들은 운영진의 재량에 의해 행사에 더 이상 참석하실 수 없으며, 참가비용은 환불해드리지 않습니다.
 		</div>
-		<a class="btn--medium btn--white" href="">전문읽기</a>
+		<a class="btn--medium btn--white" href="{% url 'coc' %}">전문읽기</a>
 	</div>
 </section>
  
 <section class="index-past">
 	<div class="overflow-auto">
-		<div class="section__title"><a href="">지난 세미나</a></div>
+		<div class="section__title"><a href="{% url 'meetup:past_list' %}">지난 세미나</a></div>
 	
 		<div class="index-past__wrapper col-33 col-m-50">
 			<div class="index-past__thumbnail">
@@ -78,7 +79,7 @@
 	
 		<div class="index-past__wrapper col-33 col-m-50">
 			<div class="index-past__thumbnail">
-				<img class="index-past__img" src="../static/img/seminar-thumbnail.jpg" alt="">
+				<img class="index-past__img" src="{% static 'img/seminar-thumbnail.jpg' %}" alt="">
 				<a class="index-past__overlay" href="#">
 					<div class="index-past__info">
 						2회
@@ -90,7 +91,7 @@
 	
 		<div class="index-past__wrapper col-33 col-m-50">
 			<div class="index-past__thumbnail">
-				<img class="index-past__img" src="../static/img/seminar-thumbnail.jpg" alt="">
+				<img class="index-past__img" src="{% static 'img/seminar-thumbnail.jpg' %}" alt="">
 				<a class="index-past__overlay" href="#">
 					<div class="index-past__info">
 						1회

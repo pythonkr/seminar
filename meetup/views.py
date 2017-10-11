@@ -1,10 +1,6 @@
 from django.shortcuts import render
 
 
-def index(request):
-    return render(request, 'index.html')
-
-
 def past(request):
     return render(request, 'past.html')
 
@@ -15,10 +11,6 @@ def past_list(request):
 
 def profile(request):
     return render(request, 'profile.html')
-
-
-def coc(request):
-    return render(request, 'coc.html')
 
 
 def speaker(request):
@@ -37,9 +29,5 @@ def program(request):
     return render(request, 'program.html')
 
 
-def login(request):
-    return render(request, 'login.html')
-
-
-def mailsent(request):
-    return render(request, 'mailsent.html')
+def registration(request):
+    return render(request, 'registration.html')

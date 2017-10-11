@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+
+	{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}" />
+</head>
+<body>
+<nav>
+	<ul class="navbar navbar__left">
+		<li class="dropdown">
+			<a href="#">세미나</a>
+			<div class="dropdown__menu">
+				<a class="dropdown__item" href="{% url 'meetup:registration' %}">등록</a>
+				<a class="dropdown__item" href="{% url 'meetup:schedule' %}">세션정보</a>
+				<a class="dropdown__item" href="{% url 'meetup:speaker_list' %}">발표자정보</a>
+				<a class="dropdown__item" href="{% url 'meetup:past_list' %}">지난 세미나</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a href="#">파이썬 사용자 모임</a>
+			<div class="dropdown__menu">
+				<a class="dropdown__item" href="">설명</a>
+				<a class="dropdown__item" href="{% url 'coc' %}">Code of Conduct</a>
+				<a class="dropdown__item" href="http://blog.pycon.kr" target="_blank">블로그</a>
+			</div>
+		</li>
+	</ul>  
+	<a class="navbar__logo" href="{% url 'index' %}"></a>
+	<div class="navbar__logo--preload"></div>
+	<ul class="navbar navbar__right">
+		{% if user.is_authenticated %}
+		<li class="dropdown">
+			<a href="">{{ user.email }}</a>
+			<div class="dropdown__menu">
+				<a class="dropdown__item" href="">프로필</a>
+				<a class="dropdown__item" href="{% url 'sentinel:logout' %}">로그아웃</a>
+			</div>
+		</li>
+		{% else %}
+		<a href="{% url 'sentinel:login' %}">로그인</a>
+		{% endif %}
+	</ul>
+</nav>
+
+<!--아래의 main-container는 index일때는 빼주세요-->  
+<div class="main-container">
+	{% block body %} {% endblock %}
+</div>
+
+<footer>
+    <div class="col-70">
+        파이썬 세미나는 파이콘 준비위원회가 만들고 있습니다.<br><br>
+        <a href="https://github.com/pythonkr"><i class="fa fa-github" aria-hidden="true"></i> github</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.facebook.com/pyconkorea/"><i class="fa fa-facebook" aria-hidden="true"></i> facebook</a>
+    </div>
+    <a class="col-30 col-m-none" href="https://www.python.org/"><img src="../static/img/python-logo.svg" alt=""></a>
+</footer>
+</body>
+</html>

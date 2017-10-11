@@ -16,22 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from meetup import views as meetup_view
-from registration import views as registration_view
+from .views import IndexView, CocTV
 
 urlpatterns = [
-    url(r'^$', meetup_view.index, name='index'),
-    url(r'^past/$', meetup_view.past),
-    url(r'^past_list/$', meetup_view.past_list),
-    url(r'^profile/$', meetup_view.profile),
-    url(r'^program/$', meetup_view.program),
-    url(r'^schedule/$', meetup_view.schedule),
-    url(r'^speaker/$', meetup_view.speaker),
-    url(r'^speaker_list/$', meetup_view.speaker_list),
-    url(r'^coc/$', meetup_view.coc),
-
-    url(r'^registration/$', registration_view.registration),
+    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^coc/$', CocTV.as_view(), name='coc'),
 
     url(r'^admin/', admin.site.urls),
     url(r'^sentinel/', include('sentinel.urls', namespace='sentinel')),
+    url(r'^meetup/', include('meetup.urls', namespace='meetup')),
 ]

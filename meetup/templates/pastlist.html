@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}지난 세미나{% endblock %}
 {% block body %}
 <section class="index-past">
@@ -7,7 +8,7 @@
   
     <div class="index-past__wrapper col-33 col-m-50">
       <div class="index-past__thumbnail">
-        <img class="index-past__img" src="../static/img/seminar-thumbnail.jpg" alt="">
+        <img class="index-past__img" src="{% static 'img/seminar-thumbnail.jpg' %}" alt="">
         <a class="index-past__overlay" href="#">
           <div class="index-past__info">
             3회
@@ -19,7 +20,7 @@
   
     <div class="index-past__wrapper col-33 col-m-50">
       <div class="index-past__thumbnail">
-        <img class="index-past__img" src="../static/img/seminar-thumbnail.jpg" alt="">
+        <img class="index-past__img" src="{% static 'img/seminar-thumbnail.jpg' %}" alt="">
         <a class="index-past__overlay" href="#">
           <div class="index-past__info">
             2회
@@ -31,7 +32,7 @@
   
     <div class="index-past__wrapper col-33 col-m-50">
       <div class="index-past__thumbnail">
-        <img class="index-past__img" src="../static/img/seminar-thumbnail.jpg" alt="">
+        <img class="index-past__img" src="{% static 'img/seminar-thumbnail.jpg' %}" alt="">
         <a class="index-past__overlay" href="#">
           <div class="index-past__info">
             1회
