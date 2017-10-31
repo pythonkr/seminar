@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^sentinel/', include('sentinel.urls', namespace='sentinel')),
     url(r'^meetup/', include('meetup.urls', namespace='meetup')),
+    url(r'^payment/', include('registration.urls', namespace='payment')),
 ]

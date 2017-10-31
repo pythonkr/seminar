@@ -89,12 +89,13 @@ class Counter(object):
             'name': ticket.title,
             'email': user.email,
             'buyer_name': buyer_name,
+            'buyer_email': user.email,
             'amount': amount,
             'card_number': card_number,
             'expiry': expiry,
             'merchant_uid': '{}_{}_{}'.format(ticket.title,
                                               buyer_name,
-                                              timezone.now().utcnow().timestamp()),
+                                              '{:.0f}'.format(timezone.now().utcnow().timestamp())),
         }
 
         if for_domestic:

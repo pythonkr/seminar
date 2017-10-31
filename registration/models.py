@@ -19,7 +19,7 @@ class Ticket(models.Model):
     maximum_count = models.PositiveIntegerField(default=0)
     start_time_to_sell = models.DateTimeField(default=timezone.now)
     sold_out_by_admin = models.BooleanField(default=True)
-    is_internal = models.BooleanField(default=True)
+    is_main = models.BooleanField(default=True)
     refund_close_datetime = models.DateTimeField(default=timezone.now)
 
     def save(self, *args, **kwargs):
@@ -30,30 +30,35 @@ class Ticket(models.Model):
 
         super(Ticket, self).save(*args, **kwargs)
 
+    @property
     def is_sellable(self):
         if self.sold_out_by_admin:
             return False
 
-        if self.not_yet_to_sell():
+        if self.not_yet_to_sell:
             return False
 
-        if self.is_over_deadline():
+        if self.is_over_deadline:
             return False
 
-        if self.is_over_maximum_count():
+        if self.is_over_maximum_count:
             return False
 
         return True
 
+    @property
     def not_yet_to_sell(self):
         return timezone.now() < self.start_time_to_sell
 
+    @property
     def is_over_deadline(self):
         return timezone.now() > self.meet_up.start_datetime
 
+    @property
     def is_over_maximum_count(self):
         return Registration.objects.filter(ticket=self).count() >= self.maximum_count
 
+    @property
     def is_refundable(self):
         return timezone.now() < self.refund_close_datetime
 

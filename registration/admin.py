@@ -6,7 +6,7 @@ from .models import Ticket, Registration, AttendCheck, PaymentHistory
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
     list_display = ('title', 'meet_up', 'charge', 'maximum_count', 'start_time_to_sell', 'sold_out_by_admin',
-                    'is_internal', 'refund_close_datetime',)
+                    'is_main', 'refund_close_datetime',)
 
 
 @admin.register(Registration)

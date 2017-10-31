@@ -72,7 +72,7 @@ class ModelMethodTest(TestCase):
                                                          sold_out_by_admin=False)
 
         self.assertFalse(self.not_sellable_ticket.is_sellable)
-        self.assertTrue(self.not_sellable_ticket.not_yet_to_sell())
+        self.assertTrue(self.not_sellable_ticket.not_yet_to_sell)
 
     def test_ticket_is_not_sellable_by_over_deadline(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
@@ -93,7 +93,7 @@ class ModelMethodTest(TestCase):
                                                          sold_out_by_admin=False)
 
         self.assertFalse(self.not_sellable_ticket.is_sellable)
-        self.assertTrue(self.not_sellable_ticket.is_over_deadline())
+        self.assertTrue(self.not_sellable_ticket.is_over_deadline)
 
     def test_ticket_is_not_sellable_by_over_maximum_count(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
@@ -117,4 +117,4 @@ class ModelMethodTest(TestCase):
         self.registration = Registration.objects.create(user=self.user, ticket=self.not_sellable_ticket)
 
         self.assertFalse(self.not_sellable_ticket.is_sellable)
-        self.assertTrue(self.not_sellable_ticket.is_over_maximum_count())
+        self.assertTrue(self.not_sellable_ticket.is_over_maximum_count)

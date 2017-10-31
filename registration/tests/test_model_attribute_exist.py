@@ -17,7 +17,7 @@ class ModelAttributeExistTest(TestCase):
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
 
         self.fields_to_verify = ['title', 'meet_up', 'created_at', 'updated_at', 'charge', 'maximum_count',
-                                 'start_time_to_sell', 'sold_out_by_admin', 'is_internal', 'refund_close_datetime']
+                                 'start_time_to_sell', 'sold_out_by_admin', 'is_main', 'refund_close_datetime']
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
         self.ticket_fields = [field.name for field in self.ticket._meta.get_fields()]
 
