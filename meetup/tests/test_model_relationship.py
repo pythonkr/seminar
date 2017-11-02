@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from meetup.models import Profile, Speaker, Program, ProgramCategory, Venue, MeetUp
+from meetup.models import Profile, Program, ProgramCategory, Venue, MeetUp
 
 User = get_user_model()
 
@@ -18,15 +18,6 @@ class ModelRelationshipTestCase(TestCase):
         self.assertEqual(self.profile.user.email, 'test@email.com')
         self.assertEqual(self.user.profile.slug, 'seho')
 
-    def test_user_become_a_speaker(self):
-        """This test is for proving that a user become a speaker"""
-        self.user = User.objects.create_user('test@email.com')
-        self.profile = Profile.objects.create(user=self.user, name='Noh Seho',
-                                              slug='seho', organization='PyCon Korea')
-        self.speaker = Speaker.objects.create(user=self.user)
-
-        self.assertEqual(self.speaker.user.email, 'test@email.com')
-
     def test_program_has_a_program_category(self):
         """This test is for proving that a program has a program category"""
         self.program_category = ProgramCategory.objects.create(name='Ruby', slug='ruby')
@@ -40,13 +31,12 @@ class ModelRelationshipTestCase(TestCase):
     def test_speaker_has_a_program(self):
         """This test is for proving that a speaker has a program"""
         self.user = User.objects.create_user('test@email.com')
-        self.speaker = Speaker.objects.create(user=self.user)
         self.program = Program.objects.create(title='How to migrate from ruby to python',
                                               brief='Have you ever write down the ruby code?',
-                                              description='Then you should watch this program')
-        self.program.speakers.add(self.speaker)
+                                              description='Then you should watch this program',
+                                              speakers=self.user)
 
-        self.assertEqual(self.program.speakers.count(), 1)
+        self.assertEqual(self.program.speakers, self.user)
 
     def test_venue_is_valid(self):
         """This test is for proving that the venue information including lat, lon is correctly saved"""

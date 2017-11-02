@@ -3,20 +3,27 @@
 {% block body %}
 <section>
 	<div class="col-100">
-		<div class="section__title">제 4회 파이썬 세미나</div>
+		<div class="section__title">{{ latest.0.start_datetime|date:"Y년 m월" }} 파이썬 세미나</div>
 
 		<div class="overflow-auto">
 			<div class="col-30 register__sidebar">
 				<div class="register__sidebar__title">주제</div>
-				<div class="register__sidebar__content">Python&Data</div>
+				<div class="register__sidebar__content">{{ latest.0.title }}</div>
 				<div class="register__sidebar__title">날짜</div>
-				<div class="register__sidebar__content">2017년 10월 21일<br>14시~18시</div>
+				<div class="register__sidebar__content">
+					{{ latest.0.start_datetime|date:"DATE_FORMAT" }}<br>
+					{{ latest.0.start_datetime|date:"H" }}~{{ latest.0.end_datetime|date:"H" }}시
+				</div>
 				<div class="register__sidebar__title">장소</div>
-				<div class="register__sidebar__content">강남역 메리츠타워 4층</div>
+				<div class="register__sidebar__content">{{ latest.0.venue }}</div>
 				<div class="register__sidebar__title">가격</div>
 				<div class="register__sidebar__content">10,000원</div>
+				{% now "Y-m-d" as todays_date %}
+				{% if latest.0.start_datetime|date:"Y-m-d" < todays_date  %}
 				<div class="alert alert--minor">이미 지난 세미나입니다.</div>
+				{% else %}
 				<button class="btn--important btn--wide btn--disabled">티켓 구매하기</button>
+				{% endif %}
 			</div>
 
 			<!--발표 이름 누르면 발표 정보 페이지로 가게 해주세요-->
@@ -49,8 +56,8 @@
 		</div>
 
 		<h1>장소</h1>
-		강남역 메리츠타워 4층
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50630.69475946206!2d126.93969068887385!3d37.52163278031148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2012d6bd01b%3A0x30702ebd32133065!2sStarfield+Coex+Mall!5e0!3m2!1sen!2s!4v1504955446159" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+		{{ latest.0.venue }}
+		<iframe src="{{ latest.0.venue.map_link }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 	</div>
 </section>
 {% endblock %}

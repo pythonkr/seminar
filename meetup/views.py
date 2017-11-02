@@ -1,8 +1,16 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.views import View
 
+from .models import MeetUp
 
-def past(request):
-    return render(request, 'past.html')
+class LatestMeetUpTV(TemplateView):
+    template_name = "past.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(LatestMeetUpTV, self).get_context_data(**kwargs)
+        context['latest'] = MeetUp.objects.order_by('-start_datetime')[:1]
+        return context
 
 
 def past_list(request):

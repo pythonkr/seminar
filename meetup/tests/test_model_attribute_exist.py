@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from meetup.models import Profile, Venue, Program, ProgramCategory, Speaker, MeetUp
+from meetup.models import Profile, Venue, Program, ProgramCategory, MeetUp
 
 User = get_user_model()
 
@@ -9,17 +9,6 @@ User = get_user_model()
 class ModelAttributeExistTest(TestCase):
     """This test class is for proving that the models' attributes exist between
     model what I declared on meetup/models.py and model what I declared on other codes to use"""
-
-    def test_profile(self):
-        """This test is for proving that the Profile model's attributes exist"""
-        self.user = User.objects.create_user('test@email.com')
-
-        self.fields_to_verify = ['user', 'name', 'slug', 'organization', 'image', 'biography']
-        self.profile = Profile.objects.create(user=self.user, name='Noh Seho',
-                                              slug='seho', organization='PyCon Korea')
-        self.profile_fields = [field.name for field in self.profile._meta.get_fields()]
-
-        [self.assertIn(field, self.profile_fields) for field in self.fields_to_verify]
 
     def test_venue(self):
         """This test is for proving that the Venue model's attributes exist """
@@ -37,16 +26,6 @@ class ModelAttributeExistTest(TestCase):
         self.program_category_fields = [field.name for field in self.program_category._meta.get_fields()]
 
         [self.assertIn(field, self.program_category_fields) for field in self.fields_to_verify]
-
-    def test_speaker(self):
-        """This test is for proving that the Speaker model's attributes exist"""
-        self.user = User.objects.create_user('test@email.com')
-
-        self.fields_to_verify = ['user']
-        self.speaker = Speaker.objects.create(user=self.user)
-        self.speaker_fields = [field.name for field in self.speaker._meta.get_fields()]
-
-        [self.assertIn(field, self.speaker_fields) for field in self.fields_to_verify]
 
     def test_program(self):
         """This test is for proving that the Program model's attributes exist"""
