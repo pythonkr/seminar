@@ -20,3 +20,5 @@ script:
 - pytest
 after_success:
 - codecov
+notifications:
+    slack: pyconkr:vF7mb3zSnEyLbxPquqpvyy6z
