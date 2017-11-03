@@ -17,7 +17,7 @@ class ModelAttributeExistTest(TestCase):
         self.meet_up = MeetUp.objects.create(title='Python User Group Bimonthly Seminar', venue=self.venue)
 
         self.fields_to_verify = ['title', 'meet_up', 'created_at', 'updated_at', 'charge', 'maximum_count',
-                                 'start_time_to_sell', 'sold_out_by_admin']
+                                 'start_time_to_sell', 'sold_out_by_admin', 'is_main', 'refund_close_datetime']
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
         self.ticket_fields = [field.name for field in self.ticket._meta.get_fields()]
 
@@ -58,9 +58,11 @@ class ModelAttributeExistTest(TestCase):
         self.ticket = Ticket.objects.create(title='Normal Ticket', meet_up=self.meet_up, charge=10000)
         self.registration = Registration.objects.create(user=self.user, ticket=self.ticket)
 
-        self.fields_to_verify = ['registration', 'is_canceled', 'payment_method']
+        self.fields_to_verify = ['registration', 'is_canceled', 'payment_method', 'imp_uid', 'merchant_uid']
         self.payment_history = PaymentHistory.objects.create(registration=self.registration,
-                                                             payment_method=PaymentHistory.payment_method_choices[0][0])
+                                                             payment_method=PaymentHistory.payment_method_choices[0][0],
+                                                             imp_uid='Sample imp uid',
+                                                             merchant_uid='Sample merchant uid')
         self.payment_history_fields = [field.name for field in self.payment_history._meta.get_fields()]
 
         [self.assertIn(field, self.payment_history_fields) for field in self.fields_to_verify]

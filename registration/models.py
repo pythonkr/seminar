@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
@@ -10,37 +12,58 @@ User = get_user_model()
 class Ticket(models.Model):
     """This model is a meet-up ticket for payment"""
     title = models.CharField(max_length=50)
-    meet_up = models.OneToOneField(MeetUp)
+    meet_up = models.ForeignKey(MeetUp)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     charge = models.PositiveIntegerField(default=0)
     maximum_count = models.PositiveIntegerField(default=0)
     start_time_to_sell = models.DateTimeField(default=timezone.now)
     sold_out_by_admin = models.BooleanField(default=True)
+    is_main = models.BooleanField(default=True)
+    refund_close_datetime = models.DateTimeField(default=timezone.now)
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.refund_close_datetime = self.meet_up.start_datetime + datetime.timedelta(hours=-1)
+        else:
+            pass
+
+        super(Ticket, self).save(*args, **kwargs)
+
+    @property
     def is_sellable(self):
         if self.sold_out_by_admin:
             return False
 
-        if self.not_yet_to_sell():
+        if self.not_yet_to_sell:
             return False
 
-        if self.is_over_deadline():
+        if self.is_over_deadline:
             return False
 
-        if self.is_over_maximum_count():
+        if self.is_over_maximum_count:
             return False
 
         return True
 
+    @property
     def not_yet_to_sell(self):
         return timezone.now() < self.start_time_to_sell
 
+    @property
     def is_over_deadline(self):
         return timezone.now() > self.meet_up.start_datetime
 
+    @property
     def is_over_maximum_count(self):
         return Registration.objects.filter(ticket=self).count() >= self.maximum_count
+
+    @property
+    def is_refundable(self):
+        return timezone.now() < self.refund_close_datetime
+
+    def __str__(self):
+        return '{} : {}'.format(self.title, self.meet_up.title)
 
 
 class Registration(models.Model):
@@ -61,8 +84,10 @@ class AttendCheck(models.Model):
 
 class PaymentHistory(models.Model):
     """This model is to store payment history"""
-    registration = models.ForeignKey(Registration, db_index=True)
+    registration = models.OneToOneField(Registration, db_index=True)
     is_canceled = models.BooleanField(default=False)
+    imp_uid = models.CharField(max_length=256, null=True)
+    merchant_uid = models.CharField(max_length=256, null=True)
 
     # For extensibility
     payment_method_choices = (

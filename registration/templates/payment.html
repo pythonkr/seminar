@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}파이썬 세미나 - 결제{% endblock %}
+{% block body %}
+<section>
+    <div class="col-33 col-m-100 col--center">
+        <div class="section__title">결제</div>
+        <div class="section--caption">
+            결제 이력을 위해 이름, 이메일, 금액<br>
+            그리고 결제 일자만 저장합니다<br>
+            그 이외의 정보는 저장하지 않습니다
+        </div>
+        <form action="." method="post">
+            {% csrf_token %}
+            <!--{% if form.errors %}-->
+            <!--<p>e-mail 형식만 입력이 가능합니다</p>-->
+            <!--{% endif %}-->
+            <div class="form-section">
+                <div class="form__title">이메일</div>
+                {{ form.email }}
+            </div>
+
+            <div class="form-section">
+                <div class="form__title">이름</div>
+                {{ form.name }}
+            </div>
+
+            <div class="form-section">
+                <div class="form__title">카드 번호 (ex: 0123-4567-8901-2345)</div>
+                {{ form.card_number }}
+            </div>
+
+            <div class="form-section">
+                <div class="form__title">카드 만료 년월 (ex: 2019-02)</div>
+                {{ form.card_expiry_date }}
+            </div>
+
+            <div class="form-section">
+                <div class="form__title">생년 월일 (ex: 960611)</div>
+                {{ form.birth_date }}
+            </div>
+
+            <div class="form-section">
+                <div class="form__title">비밀번호 앞 두글자</div>
+                {{ form.card_password }}
+            </div>
+
+            <button class="btn--wide btn--important">결제</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

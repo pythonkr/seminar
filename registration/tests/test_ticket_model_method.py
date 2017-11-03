@@ -28,7 +28,7 @@ class ModelMethodTest(TestCase):
                                                      maximum_count=10, start_time_to_sell=timezone.now(),
                                                      sold_out_by_admin=False)
 
-        self.assertTrue(self.sellable_ticket.is_sellable())
+        self.assertTrue(self.sellable_ticket.is_sellable)
 
     def test_ticket_is_not_sellable_by_admin(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` operating well by
@@ -48,7 +48,7 @@ class ModelMethodTest(TestCase):
                                                          maximum_count=10, start_time_to_sell=timezone.now(),
                                                          sold_out_by_admin=True)
 
-        self.assertFalse(self.not_sellable_ticket.is_sellable())
+        self.assertFalse(self.not_sellable_ticket.is_sellable)
         self.assertTrue(self.not_sellable_ticket.sold_out_by_admin)
 
     def test_ticket_is_not_sellable_by_not_yet(self):
@@ -71,8 +71,8 @@ class ModelMethodTest(TestCase):
                                                          start_time_to_sell=self.half_hour_later_from_now,
                                                          sold_out_by_admin=False)
 
-        self.assertFalse(self.not_sellable_ticket.is_sellable())
-        self.assertTrue(self.not_sellable_ticket.not_yet_to_sell())
+        self.assertFalse(self.not_sellable_ticket.is_sellable)
+        self.assertTrue(self.not_sellable_ticket.not_yet_to_sell)
 
     def test_ticket_is_not_sellable_by_over_deadline(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
@@ -92,8 +92,8 @@ class ModelMethodTest(TestCase):
                                                          maximum_count=10, start_time_to_sell=timezone.now(),
                                                          sold_out_by_admin=False)
 
-        self.assertFalse(self.not_sellable_ticket.is_sellable())
-        self.assertTrue(self.not_sellable_ticket.is_over_deadline())
+        self.assertFalse(self.not_sellable_ticket.is_sellable)
+        self.assertTrue(self.not_sellable_ticket.is_over_deadline)
 
     def test_ticket_is_not_sellable_by_over_maximum_count(self):
         """This test is for proving that the Ticket model's method `is_sellable() = False` and
@@ -116,5 +116,5 @@ class ModelMethodTest(TestCase):
         self.user = User.objects.create_user('test@email.com')
         self.registration = Registration.objects.create(user=self.user, ticket=self.not_sellable_ticket)
 
-        self.assertFalse(self.not_sellable_ticket.is_sellable())
-        self.assertTrue(self.not_sellable_ticket.is_over_maximum_count())
+        self.assertFalse(self.not_sellable_ticket.is_sellable)
+        self.assertTrue(self.not_sellable_ticket.is_over_maximum_count)

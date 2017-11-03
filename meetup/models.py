@@ -15,7 +15,7 @@ class Venue(models.Model):
     map_link = models.URLField(max_length=255, null=True)
 
     def __str__(self):
-        return self.name
+        return '{} : {}'.format(self.name, self.location)
 
 
 class ProgramCategory(models.Model):
@@ -35,7 +35,7 @@ class MeetUp(models.Model):
     end_datetime = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.start_datetime.strftime("%Y년 %m월")
+        return '{} : {}'.format(self.title, self.start_datetime.strftime("%Y년 %m월"))
 
 
 class Profile(models.Model):

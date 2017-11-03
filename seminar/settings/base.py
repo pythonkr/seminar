@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
 import os
+from collections import OrderedDict
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ] + [
+    # Third-Party
+    'constance',
+    'constance.backends.database',
+] + [
+    # Local app
     'meetup',
     'registration',
     'sentinel',
@@ -127,7 +132,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
 # custom user model as the default user model
 
 AUTH_USER_MODEL = 'sentinel.EmailUser'
@@ -142,3 +146,56 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG'
+        },
+
+        'requests.packages.urllib3': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG'
+        },
+
+        'registration': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        }
+    }
+}
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+
+CONSTANCE_CONFIG = OrderedDict([
+    ('IAMPORT_MERCHANT_UID_FOR_DOMESTIC', ('', 'Iamport merchant uid for domestic')),
+    ('IAMPORT_API_KEY_FOR_DOMESTIC', ('', 'Iamport api key for domestic')),
+    ('IAMPORT_API_SECRET_FOR_DOMESTIC', ('', 'Iamport api secret for domestic')),
+
+    ('IAMPORT_MERCHANT_UID_FOR_INTERNATIONAL', ('', 'Iamport merchant uid for international')),
+    ('IAMPORT_API_KEY_FOR_INTERNATIONAL', ('', 'Iamport api key for international')),
+    ('IAMPORT_API_SECRET_FOR_INTERNATIONAL', ('', 'Iamport api secret for international')),
+])
