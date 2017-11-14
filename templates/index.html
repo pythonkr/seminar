@@ -30,28 +30,30 @@
     <div class="section__title"><a href="">시간표</a></div>
 
     <div class="timetable">
-        <ul class="timetable__row">
-            <li class="timetable__time">14:00~14:50</li>
-            <li><a class="timetable__title" href="">파이썬 데이터가 주제인 발표</a></li>
-            <li><a class="timetable__speaker" href="">발표자</a></li>
-        </ul>
-        <ul class="timetable__row">
-            <li class="timetable__time">15:00~15:50</li>
-            <li><a class="timetable__title" href="">파이썬 세미나를 위한 세션 - 파이썬 데이터와 관련이 있는 주제이고 이름이 아주 길다</a></li>
-            <li><a class="timetable__speaker" href="">홍길동</a></li>
-        </ul>
-        <ul class="timetable__row">
-            <li class="timetable__time">16:00~16:50</li>
-            <li><a class="timetable__title" href="">파이썬 데이터와 관련이 있는 세션</a></li>
-            <li><a class="timetable__speaker" href="">이유라</a></li>
-        </ul>
-        <ul class="timetable__row">
-            <li class="timetable__time">17:00~17:50</li>
-            <li><a class="timetable__title" href="">아무 말이나 넣어보는 제목</a></li>
-            <li><a class="timetable__speaker" href="">파이선</a></li>
-        </ul>
-    </div>
+        {% if now_programs is not None %}
+            {% for program in now_programs %}
+                <ul class="timetable__row">
+                    <li class="timetable__time">{{ program.start_datetime|time:"H:i" }} ~ {{ program.end_datetime|time:"H:i" }}</li>
+                    <li><a class="timetable__title" href="">{{ program.title }}</a></li>
+                    <li><a class="timetable__speaker" href="">
+                        {{ program.speakers.profile.name }}
 
+                        {% comment "나중에 여러 발표자가 있을 경우도 고려해야 하지 않을까?" %}
+                            {% for speaker in program.speakers %}
+                            {{ speaker.profile.name }}
+                            {% empty %}
+                            발표자가 준비중입니다
+                            {% endfor %}
+                        {% endcomment %}
+                    </a></li>
+                </ul>
+            {% empty %}
+                <h3>시간표가 준비중입니다</h3>
+            {% endfor %}
+        {% else %}
+            <h3>시간표가 준비중입니다</h3>
+        {% endif %}
+    </div>
 </section>
 
 <section class="index-coc">

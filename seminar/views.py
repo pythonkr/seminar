@@ -35,6 +35,12 @@ class IndexView(TemplateView):
         except ObjectDoesNotExist as exception:
             pass
 
+        try:
+            now_programs = now_meet_up.program_set.all()
+            context['now_programs'] = now_programs
+        except ObjectDoesNotExist as exception:
+            pass
+
         return context
 
 
