@@ -61,3 +61,7 @@ class EmailUser(AbstractBaseUser):
     def is_staff(self):
         """Is the user a member of staff?"""
         return self.is_admin
+
+    @property
+    def is_superuser(self):
+        return self.is_admin
