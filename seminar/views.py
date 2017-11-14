@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from django.views.generic.base import TemplateView
 
@@ -28,8 +29,11 @@ class IndexView(TemplateView):
 
         context['d_day'] = d_day
 
-        now_ticket = Ticket.objects.filter(is_main=True).get(meet_up=now_meet_up)
-        context['now_ticket'] = now_ticket
+        try:
+            now_ticket = Ticket.objects.filter(is_main=True).get(meet_up=now_meet_up)
+            context['now_ticket'] = now_ticket
+        except ObjectDoesNotExist as exception:
+            pass
 
         return context
 

@@ -12,10 +12,14 @@
                 <div class="index-jumbotron__caption">
                     {{ now_meet_up.start_datetime }}<br>{{ now_meet_up.venue.location }}
                 </div>
-                {% if now_ticket.is_sellable %}
-                <a class="btn--white btn--medium" href="{% url 'meetup:registration' %}">{{ now_ticket.title }} 티켓 판매</a>
+                {% if now_ticket is not None %}
+                    {% if now_ticket.is_sellable %}
+                    <a class="btn--white btn--medium" href="{% url 'meetup:registration' %}">{{ now_ticket.title }} 티켓 판매</a>
+                    {% else %}
+                    <a class="btn--white btn--medium" href="#">{{ now_ticket.start_time_to_sell }} 오픈 예정</a>
+                    {% endif %}
                 {% else %}
-                <a class="btn--white btn--medium" href="#">{{ now_ticket.start_time_to_sell }} 오픈 예정</a>
+                    <a class="btn--white btn--medium" href="#">{{ now_ticket.start_time_to_sell }} 오픈 예정</a>
                 {% endif %}
             </div>
         </div>
