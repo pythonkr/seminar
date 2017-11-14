@@ -53,6 +53,10 @@ class Profile(models.Model):
 
 class Program(models.Model):
     """This model is lecture or event by speaker(s)"""
+
+    class Meta:
+        ordering = ['-meet_up', 'end_datetime']
+
     # There should be difficulty and language information in Program?
     title = models.CharField(max_length=255)
     brief = models.TextField(null=True, verbose_name='simple information')
