@@ -63,7 +63,9 @@ class Program(models.Model):
     pdf_url = models.URLField(null=True, verbose_name='A pdf url')
     video_url = models.URLField(null=True, verbose_name='A video url')
     is_recordable = models.BooleanField(default=True, verbose_name='recordable condition')
+    start_datetime = models.DateTimeField(default=timezone.now)
+    end_datetime = models.DateTimeField(default=timezone.now)
 
     # If kind of session or lecture True, or not False (include breaktime)
-    is_main_event = models.BooleanField(default=True)
+    is_main_event = models.BooleanField(default=True, verbose_name='If kind of session or lecture True, or not False')
     meet_up = models.ForeignKey(MeetUp, null=True)
