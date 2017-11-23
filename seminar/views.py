@@ -11,9 +11,9 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        now_meet_up = MeetUp.objects.last()
+        now_meet_up = MeetUp.objects.first()
         context['now_meet_up'] = now_meet_up
-        context['last_meet_ups'] = MeetUp.objects.all()
+        context['last_meet_ups'] = MeetUp.objects.all()[1:4]
 
         d_day = timezone.now() - now_meet_up.start_datetime
         d_day = d_day.days

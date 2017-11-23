@@ -29,6 +29,10 @@ class ProgramCategory(models.Model):
 
 class MeetUp(models.Model):
     """This model is to manage each meet-up"""
+
+    class Meta:
+        ordering = ['-id']
+
     title = models.CharField(max_length=100)
     venue = models.ForeignKey(Venue)
     start_datetime = models.DateTimeField(default=timezone.now)
