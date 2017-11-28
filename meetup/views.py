@@ -1,8 +1,9 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from django.views import View
 
 from .models import MeetUp
+
 
 class LatestMeetUpTV(TemplateView):
     template_name = "past.html"
@@ -29,8 +30,21 @@ def speaker_list(request):
     return render(request, 'speakerlist.html')
 
 
-def schedule(request):
-    return render(request, 'schedule.html')
+class ScheduleTemplateView(TemplateView):
+    template_name = 'schedule.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ScheduleTemplateView, self).get_context_data(**kwargs)
+        meet_up = MeetUp.objects.first()
+        context['meet_up'] = meet_up
+
+        try:
+            programs = meet_up.program_set.all()
+            context['programs'] = programs
+        except ObjectDoesNotExist as exception:
+            pass
+
+        return context
 
 
 def program(request):
