@@ -29,6 +29,10 @@ class ProgramCategory(models.Model):
 
 class MeetUp(models.Model):
     """This model is to manage each meet-up"""
+
+    class Meta:
+        ordering = ['-id']
+
     title = models.CharField(max_length=100)
     venue = models.ForeignKey(Venue)
     start_datetime = models.DateTimeField(default=timezone.now)
@@ -53,6 +57,10 @@ class Profile(models.Model):
 
 class Program(models.Model):
     """This model is lecture or event by speaker(s)"""
+
+    class Meta:
+        ordering = ['-meet_up', 'end_datetime']
+
     # There should be difficulty and language information in Program?
     title = models.CharField(max_length=255)
     brief = models.TextField(null=True, verbose_name='simple information')
@@ -63,7 +71,9 @@ class Program(models.Model):
     pdf_url = models.URLField(null=True, verbose_name='A pdf url')
     video_url = models.URLField(null=True, verbose_name='A video url')
     is_recordable = models.BooleanField(default=True, verbose_name='recordable condition')
+    start_datetime = models.DateTimeField(default=timezone.now)
+    end_datetime = models.DateTimeField(default=timezone.now)
 
     # If kind of session or lecture True, or not False (include breaktime)
-    is_main_event = models.BooleanField(default=True)
+    is_main_event = models.BooleanField(default=True, verbose_name='If kind of session or lecture True, or not False')
     meet_up = models.ForeignKey(MeetUp, null=True)
